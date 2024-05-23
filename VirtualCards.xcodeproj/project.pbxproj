@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B8196E82BFEA0EE00D4E570 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8196E72BFEA0EE00D4E570 /* Home.swift */; };
+		2B8196EB2BFED49800D4E570 /* CreateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8196EA2BFED49800D4E570 /* CreateCard.swift */; };
 		2BCEB0F82BFC3E9900884B28 /* VirtualCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCEB0F72BFC3E9900884B28 /* VirtualCardsApp.swift */; };
 		2BCEB0FA2BFC3E9900884B28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCEB0F92BFC3E9900884B28 /* ContentView.swift */; };
 		2BCEB0FC2BFC3E9B00884B28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BCEB0FB2BFC3E9B00884B28 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B8196E72BFEA0EE00D4E570 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		2B8196EA2BFED49800D4E570 /* CreateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCard.swift; sourceTree = "<group>"; };
 		2BCEB0F42BFC3E9900884B28 /* VirtualCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BCEB0F72BFC3E9900884B28 /* VirtualCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualCardsApp.swift; sourceTree = "<group>"; };
 		2BCEB0F92BFC3E9900884B28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +36,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B8196E52BFEA0AC00D4E570 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				2B8196E62BFEA0C300D4E570 /* Home */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		2B8196E62BFEA0C300D4E570 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2B8196E72BFEA0EE00D4E570 /* Home.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2B8196E92BFED48600D4E570 /* CreateCard */ = {
+			isa = PBXGroup;
+			children = (
+				2B8196EA2BFED49800D4E570 /* CreateCard.swift */,
+			);
+			path = CreateCard;
+			sourceTree = "<group>";
+		};
 		2BCEB0EB2BFC3E9900884B28 = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +79,8 @@
 		2BCEB0F62BFC3E9900884B28 /* VirtualCards */ = {
 			isa = PBXGroup;
 			children = (
+				2B8196E92BFED48600D4E570 /* CreateCard */,
+				2B8196E52BFEA0AC00D4E570 /* Pages */,
 				2BCEB0F72BFC3E9900884B28 /* VirtualCardsApp.swift */,
 				2BCEB0F92BFC3E9900884B28 /* ContentView.swift */,
 				2BCEB0FB2BFC3E9B00884B28 /* Assets.xcassets */,
@@ -138,7 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BCEB0FA2BFC3E9900884B28 /* ContentView.swift in Sources */,
+				2B8196EB2BFED49800D4E570 /* CreateCard.swift in Sources */,
 				2BCEB0F82BFC3E9900884B28 /* VirtualCardsApp.swift in Sources */,
+				2B8196E82BFEA0EE00D4E570 /* Home.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
