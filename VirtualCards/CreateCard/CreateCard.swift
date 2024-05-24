@@ -92,7 +92,7 @@ struct CustomTextField: View {
         }
         .frame(width: screenWidth-20, height:60)
         .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/,width: 4)
-        .cornerRadius(10)
+        .cornerRadius(10,antialiased: true)
         .padding(.top,20)
         
     }
