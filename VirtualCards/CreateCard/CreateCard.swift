@@ -13,6 +13,15 @@ struct CreateCard: View {
     
     @State var CardNumber: String = "";
     @State var CardName: String = "";
+    @State var ChosenPattern: PatternModel = PatternModel(
+        id: UUID(), name: "", type: .nations, backgroundThumbImage: "", backgroundImage: ""
+    );
+    
+    
+    func handleChoosePattern (pattern:PatternModel) {
+        print(pattern.backgroundImage, pattern.name)
+        self.ChosenPattern = pattern;
+    }
     
     var body: some View {
         
@@ -20,14 +29,17 @@ struct CreateCard: View {
             
             Text("Add Card")
             
-            Card()
+            Card(cardPattern: self.ChosenPattern)
             
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
-                    Patterns()
-                    Patterns()
-                    Patterns()
-                    Patterns()
+                    ForEach(dataPatterns){ pattern in
+                        
+                        PatternComponent(patternProps: pattern)
+                            .onTapGesture {
+                                handleChoosePattern(pattern: pattern)
+                            }
+                    }
                 }.padding(.leading,20)
             }
             
@@ -39,6 +51,8 @@ struct CreateCard: View {
 }
 
 struct Card: View {
+    
+    let cardPattern: PatternModel
     
     var body: some View {
         
@@ -59,19 +73,26 @@ struct Card: View {
                     .padding(.trailing, 20)
             }
             Spacer().frame(height: 20)
-        }.frame(width: screenWidth - 40, height: 200)
-            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/,width: 5)
-            .cornerRadius(10)
+        }
+        .background(Image(cardPattern.backgroundImage))
+        .frame(width: screenWidth - 40, height: 200)
+        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/,width: 5)
+        .cornerRadius(10)
         
         
     }
 }
 
-struct Patterns: View {
+struct PatternComponent: View {
+    
+    let patternProps: PatternModel
+    
     
     var body: some View{
         VStack{
-            
+            Image("\(self.patternProps.backgroundThumbImage)")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
         }
         .frame(width: 100, height: 100)
         .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 3)
