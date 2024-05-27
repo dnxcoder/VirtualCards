@@ -14,7 +14,7 @@ struct CreateCard: View {
     @State var CardNumber: String = "";
     @State var CardName: String = "";
     @State var ChosenPattern: PatternModel = PatternModel(
-        id: UUID(), name: "", type: .nations, backgroundThumbImage: "", backgroundImage: ""
+        id: UUID(), name: "", type: .nations, backgroundThumbImage: "", backgroundImage: "", fontColor: .red
     );
     
     
@@ -56,28 +56,29 @@ struct Card: View {
     
     var body: some View {
         
-        VStack(alignment:.center){
+        HStack{
+            VStack(alignment:.leading){
+                Spacer()
+                Text("2342 2034 1203 2213")
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(self.cardPattern.fontColor.color)
+                Text("Exp: 09/26")
+                    .fontWeight(.thin)
+                    .foregroundColor(self.cardPattern.fontColor.color)
+                Text("George W Bush")
+                    .fontWeight(.bold)
+                    .foregroundColor(self.cardPattern.fontColor.color)
+            }
+            .padding(.leading,20)
             Spacer()
-            Text("---- ---- ---- ----")
-            Spacer().frame(height: 20)
-            HStack{
-                Text("Exp. -- / --")
-                    .padding(.leading, 20)
-                Spacer()
-            }
-            Spacer().frame(height: 20)
-            
-            HStack{
-                Spacer()
-                Text("NARUTO UZUMAKI")
-                    .padding(.trailing, 20)
-            }
-            Spacer().frame(height: 20)
         }
-        .background(Image(cardPattern.backgroundImage))
         .frame(width: screenWidth - 40, height: 200)
-        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/,width: 5)
-        .cornerRadius(10)
+        .background(Image(cardPattern.backgroundImage)
+            .resizable()
+            .aspectRatio(contentMode: .fill))
+        .padding(.bottom, 15)
+        .cornerRadius(20)
+        .shadow(color: Color.black.opacity(0.4), radius: 10, x: 10, y: 10)
         
         
     }
@@ -90,13 +91,15 @@ struct PatternComponent: View {
     
     var body: some View{
         VStack{
-            Image("\(self.patternProps.backgroundThumbImage)")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-        }
-        .frame(width: 100, height: 100)
-        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 3)
-        .cornerRadius(10)
+            VStack{
+                Image("\(self.patternProps.backgroundThumbImage)")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            .frame(width: 100, height: 100)
+            .cornerRadius(10)
+            .shadow(color: Color.black.opacity(0.4), radius: 10, x: 10, y: 10)
+        }.frame(width: 110, height: 100)
     }
 }
 
