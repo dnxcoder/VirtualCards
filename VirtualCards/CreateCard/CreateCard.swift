@@ -11,16 +11,17 @@ let screenWidth = UIScreen.main.bounds.width;
 
 struct CreateCard: View {
     
-    @State var CardNumber: String = "";
-    @State var CardName: String = "";
-    @State var ChosenPattern: PatternModel = PatternModel(
-        id: UUID(), name: "", type: .nations, backgroundThumbImage: "", backgroundImage: "", fontColor: .red
+    @State var cardNumber: String = "";
+    @State var cardName: String = "";
+    @State var cardExp: String = "";
+    @State var chosenPattern: PatternModel = PatternModel(
+        id: UUID(), name: "", type: .nations, backgroundThumbImage: "", backgroundImage: "usa-background", fontColor: .red
     );
     
     
     func handleChoosePattern (pattern:PatternModel) {
         print(pattern.backgroundImage, pattern.name)
-        self.ChosenPattern = pattern;
+        self.chosenPattern = pattern;
     }
     
     var body: some View {
@@ -29,7 +30,8 @@ struct CreateCard: View {
             
             Text("Add Card")
             
-            Card(cardPattern: self.ChosenPattern)
+            Card(cardPattern: self.chosenPattern, cardNumber: self.$cardNumber,
+                 cardExp: self.$cardExp,cardName: self.$cardName  )
             
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
@@ -41,10 +43,11 @@ struct CreateCard: View {
                             }
                     }
                 }.padding(.leading,20)
-            }
-            
-            CustomTextField(placeHolder: "0000 0000 0000 0000", TextFieldValue: self.$CardNumber)
-            CustomTextField(placeHolder: "Your Name", TextFieldValue: self.$CardName)
+                
+            }.scrollClipDisabled()
+            CustomTextField(placeHolder: "XXXX XXXX XXXX XXXX", TextFieldValue: self.$cardNumber)
+            CustomTextField(placeHolder: "EXP DATE", TextFieldValue: self.$cardExp)
+            CustomTextField(placeHolder: "YOUR NAME", TextFieldValue: self.$cardName)
             Spacer()
         }
     }
@@ -53,19 +56,24 @@ struct CreateCard: View {
 struct Card: View {
     
     let cardPattern: PatternModel
+    @Binding var cardNumber: String;
+    @Binding var cardExp: String;
+    @Binding var cardName: String;
     
     var body: some View {
         
         HStack{
             VStack(alignment:.leading){
                 Spacer()
-                Text("2342 2034 1203 2213")
+                Text(self.cardNumber == "" ? "XXXX XXXX XXXX XXXX" : self.cardNumber)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(self.cardPattern.fontColor.color)
-                Text("Exp: 09/26")
-                    .fontWeight(.thin)
+                    .padding(.bottom, 1)
+                Text(self.cardExp == "" ? "Exp: 05/26" : "Exp " + self.cardExp)
                     .foregroundColor(self.cardPattern.fontColor.color)
-                Text("George W Bush")
+                    .padding(.bottom, 1)
+                    .fontWeight(.semibold)
+                Text(self.cardName == "" ? "GEORGE WASHINGTON" : self.cardName )
                     .fontWeight(.bold)
                     .foregroundColor(self.cardPattern.fontColor.color)
             }
@@ -90,35 +98,37 @@ struct PatternComponent: View {
     
     
     var body: some View{
+        
         VStack{
-            VStack{
-                Image("\(self.patternProps.backgroundThumbImage)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            }
-            .frame(width: 100, height: 100)
-            .cornerRadius(10)
-            .shadow(color: Color.black.opacity(0.4), radius: 10, x: 10, y: 10)
-        }.frame(width: 110, height: 100)
+            Image("\(self.patternProps.backgroundThumbImage)")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        }
+        .frame(width: 100, height: 100)
+        .cornerRadius(10)
+        .clipped(antialiased: false)
+        .shadow(color: Color.black.opacity(0.4), radius: 10, x: 10, y: 10)
     }
 }
 
 struct CustomTextField: View {
     
     var placeHolder: String = "";
+    @State private var creditCardNumber: String = ""
     @Binding var TextFieldValue: String;
     
     var body: some View{
         HStack{
             TextField(self.placeHolder,text: self.$TextFieldValue)
+                .font(.system(size: 15))
                 .padding(.leading,20)
                 .keyboardType(.numberPad)
+                .frame(width: screenWidth-20, height:50)
+                .background(Color.white)
+                .cornerRadius(10,antialiased: true)
+                .shadow(color: Color.black.opacity(0.4), radius: 10, x: 10, y: 15)
+                .padding(.top,5)
         }
-        .frame(width: screenWidth-20, height:60)
-        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/,width: 4)
-        .cornerRadius(10,antialiased: true)
-        .padding(.top,20)
-        
     }
 }
 
